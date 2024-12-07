@@ -60,14 +60,12 @@ export function warnThemePackage(pkg: PackageJSON, logger: HookParameters<"astro
 			!description,
 			`Add a 'description' to your theme's 'package.json'!\\nAstro uses this value to populate the integrations page https://astro.build/integrations/\n\n\t"description": "My awesome Astro theme!"`,
 		);
-		
 
 		// Warn theme author if no 'homepage' property exists inside 'package.json'
 		warn(
 			!homepage,
 			`Add a 'homepage' to your theme's 'package.json'!\\nAstro uses this value to populate the integrations page https://astro.build/integrations/\n\n\t"homepage": "https://github.com/UserName/theme-playground"`,
 		);
-		
 
 		// Warn theme author if no 'repository' property exists inside 'package.json'
 		warn(
@@ -77,10 +75,11 @@ export function warnThemePackage(pkg: PackageJSON, logger: HookParameters<"astro
 					type: "git",
 					url: `https://github.com/UserName/${name}`,
 					directory: "package",
-				}, null, 4,
+				},
+				null,
+				4,
 			).replaceAll("\n", "\n\t")}`,
 		);
-		
 
 		// Warn theme author if package does not have a README
 		warn(
@@ -89,8 +88,12 @@ export function warnThemePackage(pkg: PackageJSON, logger: HookParameters<"astro
 		);
 
 		if (hasIssues) {
-			logger.warn("These warnings in order to notice for people who are preparing to submit theme to the Astro integration page, ");
-			logger.warn("If you don't want to submit your theme, you can set `'private': true` inside the `package.json` to suppress these warnings.");
+			logger.warn(
+				"These warnings in order to notice for people who are preparing to submit theme to the Astro integration page, ",
+			);
+			logger.warn(
+				"If you don't want to submit your theme, you can set `'private': true` inside the `package.json` to suppress these warnings.",
+			);
 		}
 	}
 }
