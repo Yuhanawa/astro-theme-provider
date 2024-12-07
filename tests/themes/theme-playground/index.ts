@@ -8,6 +8,7 @@ export default defineTheme({
 		title: z.string(),
 		description: z.string().optional(),
 		sitemap: z.boolean().optional().default(true),
+		customCornerMessage: z.function().args(z.instanceof(URL)).returns(z.string()).optional(),
 	}),
 	imports: {
 		test: {

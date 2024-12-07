@@ -118,9 +118,10 @@ export default function <ThemeName extends string, Schema extends z.ZodTypeAny>(
 
 					const projectRoot = resolveDirectory("./", config.root);
 
+					(globalThis as any)[themeName] = { userConfig, userConfigPartial };
 					// Record of virtual imports and their content
 					const virtualImports: Parameters<typeof createVirtualResolver>[0]["imports"] = {
-						[`${themeName}:config`]: `export default ${JSON.stringify(userConfig)}`,
+						[`${themeName}:config`]: `export default globalThis["${themeName}"].userConfig;`,
 						[`${themeName}:context`]: "",
 					};
 

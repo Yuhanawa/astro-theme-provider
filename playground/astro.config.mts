@@ -11,7 +11,12 @@ export default defineConfig({
 			config: {
 				title: "Hey!",
 				description: "This is a theme created using",
-				// sitemap: false
+				// sitemap: false,
+				customCornerMessage: (url: URL) => {
+					if (url.pathname === "/") return "you are on home page";
+					if (url.pathname.startsWith("/cats")) return `you are on cats page, it's cute!`;
+					return `current url: ${url}`;
+				},
 			},
 			pages: {
 				// '/cats': '/dogs',
