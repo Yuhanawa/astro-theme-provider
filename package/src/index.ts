@@ -167,7 +167,6 @@ export default function <ThemeName extends string, Schema extends z.ZodTypeAny>(
 						ThemeIntegrationsResolved: "",
 					};
 
-
 					if (logLevel) {
 						// Warn about issues with theme's `package.json`
 						warnThemePackage(themePackage, logger);
@@ -193,6 +192,7 @@ export default function <ThemeName extends string, Schema extends z.ZodTypeAny>(
 					const integrationsIgnored: Record<string, false> = {};
 
 					for (const option of themeIntegrations) {
+						// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 						let integration: ReturnType<Extract<typeof option, (...args: any[]) => any>>;
 
 						// Handle integration options that might be a callback for conditonal injection
@@ -225,7 +225,7 @@ export default function <ThemeName extends string, Schema extends z.ZodTypeAny>(
 					virtualImports[`${themeName}:context`] += `\nexport const integrations = new Set(${JSON.stringify(
 						Array.from(Object.keys(integrationsExisting)),
 					)})`;
-					moduleBuffers[`${themeName}:context`] += `\nexport const integrations: Set<string>`;
+					moduleBuffers[`${themeName}:context`] += "\nexport const integrations: Set<string>";
 
 					// Type interfaces for theme integrations, used to build other types like the user config
 					interfaceBuffers.ThemeIntegrations = `${JSON.stringify(integrationsPossible, null, 4).slice(1, -1)}` || "\n";
@@ -398,10 +398,10 @@ export default function <ThemeName extends string, Schema extends z.ZodTypeAny>(
 				},
 				"astro:config:done": ({ injectTypes }) => {
 					injectTypes({
-						filename: 'theme.d.ts',
+						filename: "theme.d.ts",
 						content: themeTypesBuffer,
 					});
-				}
+				},
 			},
 		};
 

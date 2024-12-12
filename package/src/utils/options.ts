@@ -1,3 +1,4 @@
+// biome-ignore lint/suspicious/noExplicitAny: <explanation>
 export function mergeOptions(target: Record<any, any>, source: Record<any, any>) {
 	for (const key in source) {
 		const value = source[key];

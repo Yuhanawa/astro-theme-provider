@@ -44,7 +44,7 @@ export interface VirtualModule extends ResolvedModuleObject {
 }
 
 export function camelCase(str: string) {
-	return str.replace(/(-|<|>|:|"|\/|\\|\||\?|\*|\s)./g, (x) => x[1]!.toUpperCase());
+	return str.replace(/(-|<|>|:|"|\/|\\|\||\?|\*|\s)./g, (x) => x[1]?.toUpperCase() ?? "");
 }
 
 export function resolveId(root: string, id: string) {
@@ -76,6 +76,7 @@ export function toModuleObject(option: ModuleImports | ModuleExports | ModuleObj
 
 	const { imports = [], exports = option as ModuleExports } = option as ModuleObject;
 
+	// biome-ignore lint/performance/noDelete: <explanation>
 	delete exports.imports;
 
 	return { imports, exports };
@@ -210,7 +211,7 @@ export function generateTypesFromModule(
 	for (const [name, path] of Object.entries(exports)) {
 		if (!path || isSideEffectImport(path)) continue;
 
-		let type;
+		let type: string;
 
 		if (isImageFile(path)) {
 			type = `import("astro").ImageMetadata`;

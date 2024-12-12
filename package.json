@@ -18,7 +18,7 @@
 		"docs:build": "pnpm --filter docs build",
 		"changeset": "changeset",
 		"lint": "biome check .",
-		"lint:fix": "biome check --apply ."
+		"lint:fix": "biome check --write ."
 	},
 	"license": "MIT",
 	"devDependencies": {

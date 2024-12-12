@@ -67,8 +67,7 @@ export function resolveDirectory(base: string, path: string | URL, message: bool
 	path = normalizePath(path);
 
 	if (message && !existsSync(path)) {
-		if (message === true) message = "Resolved directory does not exist";
-		throw new AstroError(message, path);
+		throw new AstroError(message === true ? "Resolved directory does not exist" : message, path);
 	}
 
 	return path;
@@ -90,8 +89,7 @@ export function resolveFilepath(base: string, path: string | URL, message: strin
 	path = normalizePath(path);
 
 	if (message && !existsSync(path)) {
-		if (message === true) message = "Resolved filepath does not exist";
-		throw new AstroError(message, path);
+		throw new AstroError(message === true ? "Resolved filepath does not exist" : message, path);
 	}
 
 	return path;
